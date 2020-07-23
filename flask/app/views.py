@@ -28,7 +28,7 @@ def predict():
 
     # global model 
     model = pickle.load(open("model.pkl", 'rb'))
-    print(model)
+    # print(model)
     docid = next(request.form.values())
     prediction = model[int(docid)]
 
@@ -45,7 +45,7 @@ def results():
     return jsonify(prediction)
 
 
-@app.route('/test/<int:docid>', methods=['GET'])
+@app.route('/query/<int:docid>', methods=['GET'])
 def get_prediction(docid):
     return jsonify({"prediction": model[docid]})
 
