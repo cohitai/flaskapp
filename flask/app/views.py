@@ -52,3 +52,6 @@ def get_prediction(docid):
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+
+# test
