@@ -50,8 +50,11 @@ def get_prediction(docid):
     return jsonify({"prediction": model[docid]})
 
 
+
+@app.route('/query_1', methods=['GET'])
+def relative():
+    return jsonify({"relative": str(list(model.keys()))})
+
+
 if __name__ == "__main__":
     app.run(debug=True)
-
-
-# test

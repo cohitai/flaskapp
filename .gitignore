@@ -1,2 +1,4 @@
 flask/vpn/
 flask/app/__pycache__/
+flask/model.pkl
+flask/__pycache__/
