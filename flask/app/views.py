@@ -36,19 +36,9 @@ def predict():
                            , prediction_text4='{}'.format(prediction[3]), prediction_text5='{}'.format(prediction[4]))
 
 
-@app.route('/results', methods=['POST'])
-def results():
-    global model
-    data = request.get_json(force=True)
-    prediction = model[int(data['DocId'])]
-    # prediction = [int(x) for x in prediction]
-    return jsonify(prediction)
-
-
 @app.route('/query/<int:docid>', methods=['GET'])
 def get_prediction(docid):
     return jsonify({"prediction": model[docid]})
-
 
 
 @app.route('/query_1', methods=['GET'])
