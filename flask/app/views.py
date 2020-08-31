@@ -3,8 +3,8 @@ import pickle
 from app import app
 import os
 
-global model 
-model = pickle.load(open("model.pkl", 'rb'))
+#global model 
+#model = pickle.load(open("model.pkl", 'rb'))
 
 @app.route('/')
 def home():

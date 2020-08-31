@@ -7,7 +7,7 @@ WORKDIR /app
 # Copy the current directory contents into the container at /app
 ADD . /app
 
-COPY model.pkl /app/
+# COPY model.pkl /app/
 
 # Install the dependecies
 RUN pip install -r requirements.txt

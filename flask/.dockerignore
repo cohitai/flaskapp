@@ -1,2 +1,3 @@
 vpn/
 __pycache__/
+model.pkl
