@@ -20,8 +20,9 @@ def upload_file():
         f = request.files['file']
         global model
         model = pickle.load(f)
-        contents = f.read()
+        #contents = f.read()
         pickle.dump(model, open('model.pkl', 'wb'))
+        #model.save("model1.pkl")
         return 'file uploaded successfully'
 
 @app.route('/predict', methods=['POST'])
@@ -43,7 +44,7 @@ def get_prediction(docid):
         try:
             return jsonify({"prediction": model[docid]})
         except NameError:
-            time.sleep(5)
+            time.sleep(.5)
 
 
 @app.route('/query_1', methods=['GET'])
@@ -52,7 +53,7 @@ def relative():
         try: 
             return jsonify({"relative": str(list(model.keys()))})
         except NameError:
-            time.sleep(5)
+            time.sleep(.5)
 
 
 if __name__ == "__main__":
