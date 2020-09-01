@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify, render_template
 import pickle
 from app import app
 import os
+import time
 
 #global model 
 #model = pickle.load(open("model.pkl", 'rb'))
@@ -38,12 +39,20 @@ def predict():
 
 @app.route('/query/<int:docid>', methods=['GET'])
 def get_prediction(docid):
-    return jsonify({"prediction": model[docid]})
+    while True: 
+        try:
+            return jsonify({"prediction": model[docid]})
+        except NameError:
+            time.sleep(5)
 
 
 @app.route('/query_1', methods=['GET'])
 def relative():
-    return jsonify({"relative": str(list(model.keys()))})
+    while True:
+        try: 
+            return jsonify({"relative": str(list(model.keys()))})
+        except NameError:
+            time.sleep(5)
 
 
 if __name__ == "__main__":
