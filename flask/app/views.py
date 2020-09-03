@@ -51,7 +51,7 @@ def get_prediction(docid):
 def relative():
     while True:
         try: 
-            return jsonify({"relative": str(list(model.keys()))})
+            return jsonify({"relative": str(sorted(list(model.keys())))})
         except NameError:
             time.sleep(.5)
 
