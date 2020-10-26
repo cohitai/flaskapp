@@ -13,7 +13,21 @@ services:
 
   nginx:
         build: ./nginx
+        volumes:
+            - /etc/letsencrypt/ssl-dhparams.pem:/etc/letsencrypt/ssl-dhparams.pem
+            - ./dh-param/dhparam-2048.pem:/etc/ssl/certs/dhparam-2048.pem
+            - ./letsencrypt/letsencrypt-site:/usr/share/nginx/html
+            - /etc/letsencrypt/options-ssl-nginx.conf:/etc/letsencrypt/options-ssl-nginx.conf
+            - /etc/letsencrypt/live/apiblzapp.ml/fullchain.pem:/etc/letsencrypt/live/apiblzapp.ml/fullchain.pem
+            - /etc/letsencrypt/live/apiblzapp.ml/privkey.pem:/etc/letsencrypt/live/apiblzapp.ml/privkey.pem
         container_name: nginx
         restart: always
         ports:
             - "80:80"
+            - "443:443"
+  bot:
+        build: ./training_bot
+        # volumes:
+            # - /home/cohitai/flaskapp/training_bot/BLZ/data:/bot/data
+        container_name: bot
+        restart: always
