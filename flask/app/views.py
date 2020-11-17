@@ -1,11 +1,33 @@
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, make_response
 import pickle
+from flask_sqlalchemy import SQLAlchemy
+import uuid
+from werkzeug.security import generate_password_hash, check_password_hash
 from app import app
+import jwt
 import os
 import time
+import datetime
+from functools import wraps
 
-#global model 
-#model = pickle.load(open("model.pkl", 'rb'))
+app.config['SECRET_KEY'] = 'thisisthesecretkey'
+
+def token_required(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        token = request.args.get('token') #http://127.0.0.1/route?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiTGl2aW5nZG9jcyIsImV4cCI6MTYwNTYyNTc3OH0.eiwl2xGq6qvM5j8D3GlVb_R7OS4zr3MYRmjlRwHYyAM
+
+        if not token:
+            return jsonify({'message' : 'Token is missing!'}), 403
+
+        try: 
+            data = jwt.decode(token, app.config['SECRET_KEY'])
+        except:
+            return jsonify({'message' : 'Token is invalid!'}), 403
+
+        return f(*args, **kwargs)
+
+    return decorated
 
 @app.route('/')
 def home():
@@ -55,6 +77,21 @@ def relative():
         except NameError:
             time.sleep(.5)
 
+@app.route('/protected')
+@token_required
+def protected():
+    return jsonify({'message' : 'This is only available for people with valid tokens.'})
+
+@app.route('/login')
+def login():
+    auth = request.authorization
+
+    if auth and auth.password == 'einberliner':
+        #token = jwt.encode({'iat': datetime.datetime.utcnow(), 'user' : auth.username, 'exp' : datetime.datetime.utcnow() + datetime.timedelta(minutes=15)}, app.config['SECRET_KEY'])
+        token = jwt.encode({'iat': datetime.datetime.utcnow(), 'user' : auth.username, "scope": "public-api:read", "type": "client"}, app.config['SECRET_KEY'])
+        return jsonify({'token' : token.decode('UTF-8')})
+    return make_response('Could not verify!',401) 
+    #return 'test'
 
 if __name__ == "__main__":
-    app.run(debug=False)
+    app.run(debug=True)
