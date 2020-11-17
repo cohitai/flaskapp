@@ -1,6 +1,6 @@
-# Use the Python3.7.6 container image
-FROM python:3.7.6-stretch
-
+# Use the Python3.8 container image
+#FROM python:3.7.6-stretch
+FROM python:3.8
 # Set the working directory to /app
 WORKDIR /app
 
