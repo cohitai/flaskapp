@@ -58,7 +58,7 @@ def predict():
 @app.route('/query/<int:docid>', methods=['GET'])
 def get_prediction(docid):
     model = pickle.load(open(path_to_model, 'rb'))
-    while True: 
+    while True:
         try:
             return jsonify({"prediction": model[docid]})
         except NameError:
@@ -148,8 +148,7 @@ def login():
         #token = jwt.encode({'iat': datetime.datetime.utcnow(), 'user' : auth.username, 'exp' : datetime.datetime.utcnow() + datetime.timedelta(minutes=15)}, app.config['SECRET_KEY'])
         token = jwt.encode({'iat': datetime.datetime.utcnow(), 'user' : auth.username, "scope": "public-api:read", "type": "client"}, app.config['SECRET_KEY'])
         return jsonify({'token' : token.decode('UTF-8')})
-    return make_response('Could not verify!',401) 
-    #return 'test'
+    return make_response('Could not verify!',401)
 
 if __name__ == "__main__":
     app.run(debug=True)

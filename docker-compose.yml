@@ -10,6 +10,8 @@ services:
             - APP_NAME=MyFlaskApp
         expose:
             - 8080
+        volumes:
+            - prediction-files:/app/prediction
 
   nginx:
         build: ./nginx
@@ -26,8 +28,18 @@ services:
             - "80:80"
             - "443:443"
   bot:
-        build: ./training_bot
+        build: ./training_bot_v2
         # volumes:
             # - /home/cohitai/flaskapp/training_bot/BLZ/data:/bot/data
         container_name: bot
         restart: always
+        volumes:
+            - prediction-files:/bot/data/output/prediction
+        logging:
+            driver: "json-file"
+            options:
+              max-size: "200k"
+              max-file: "5" 
+
+volumes:
+  prediction-files:
