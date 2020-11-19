@@ -76,7 +76,7 @@ def get_exclusion(docid):
         list_ex = pickle.load(f)
         list_ex.append(docid)
     with open(path_to_exclusion,'wb') as f:
-        pickle.dump(list_ex,f)
+        pickle.dump(list(set(list_ex)),f)
     try:
         return 'DocId {0} is now excluded'.format(docid)
     except NameError:
@@ -103,7 +103,7 @@ def reinclude(docid):
 
 @app.route('/exclusions_list', methods=['GET'])
 def list_ext():
-    
+
     # initiating an empty list if it does not exist yet.    
     if not os.path.exists(path_to_exclusion):
         with open(path_to_exclusion, 'wb') as f:
