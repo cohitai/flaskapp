@@ -9,10 +9,10 @@
 <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-<body style="background: #506c94">
+<body style="background: #59269bc5">
  <div class="login">
-	<h1>BLZ: Recommendations Engine.
-              -version:2.0. 
+	<h1>Berliner Zeitung: Recommendation's Engine.
+              (v. 2.0.) 
               
   </h1>
 
@@ -30,13 +30,27 @@
    <a href = {{prediction_text3}}> Recommendation 3 </a>
    <a href = {{prediction_text4}}> Recommendation 4 </a>
    <a href = {{prediction_text5}}> Recommendation 5 </a>
+   <h2> Articles exclusion form:
+   </h2>
+
+   <form action="http://127.0.0.1/exclusion_form" method = "POST">
+    <label for="fname">Exclude article:</label><br>
+    <input type="text" name="DocId" placeholder="DocId" required="required">
+    <input type="submit" value="Submit">
+  </form> 
+
+  <form action="http://127.0.0.1/inclusion_form" method = "POST">
+    <label for="fname">Include article:</label><br>
+    <input type="text" name="DocId" placeholder="DocId" required="required">
+    <input type="submit" value="Submit">
+  </form> 
  </div>
 
-
- <form action = "http://http://127.0.0.1/uploader" method = "POST" enctype = "multipart/form-data">
+<div class="upload">
+ <form action = "http://127.0.0.1/uploader" method = "POST" enctype = "multipart/form-data">
      <input type = "file" name = "file" />
      <input type = "submit"/>
  </form>
-
+</div>
 </body>
 </html>

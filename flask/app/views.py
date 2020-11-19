@@ -64,6 +64,19 @@ def get_prediction(docid):
         except NameError:
             time.sleep(.5)
 
+
+@app.route('/exclusion_form', methods=['POST'])
+def exclusion_form():
+    docid = next(request.form.values())
+    return get_exclusion(docid)
+
+
+@app.route('/inclusion_form', methods=['POST'])
+def inclusion_form():
+    docid = next(request.form.values())
+    return reinclude(docid)
+
+
 @app.route('/exclude/<int:docid>', methods=['GET'])
 def get_exclusion(docid):
 
