@@ -67,6 +67,7 @@ def get_prediction(docid):
 @app.route('/exclude/<int:docid>', methods=['GET'])
 def get_exclusion(docid):
 
+    # initiating an empty list if it does not exist yet. 
     if not os.path.exists(path_to_exclusion):
         with open(path_to_exclusion, 'wb') as f:
             pickle.dump([],f)
@@ -83,6 +84,11 @@ def get_exclusion(docid):
 
 @app.route('/include/<int:docid>', methods=['GET'])
 def reinclude(docid):
+    
+    # initiating an empty list if it does not exist yet. 
+    if not os.path.exists(path_to_exclusion):
+        with open(path_to_exclusion, 'wb') as f:
+            pickle.dump([],f)
 
     with open(path_to_exclusion, 'rb') as f:
         exclusion_data = pickle.load(f)
@@ -98,6 +104,11 @@ def reinclude(docid):
 @app.route('/exclusions_list', methods=['GET'])
 def list_ext():
     
+    # initiating an empty list if it does not exist yet.    
+    if not os.path.exists(path_to_exclusion):
+        with open(path_to_exclusion, 'wb') as f:
+            pickle.dump([],f)
+
     exclusion_data = []
     with open(path_to_exclusion, 'rb') as f:
         return jsonify({"excluded articles": str( pickle.load(f))})
