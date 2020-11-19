@@ -35,8 +35,8 @@ services:
         container_name: bot
         restart: always
         volumes:
-            - prediction-files:/bot/data/output/prediction
-            - exclusion-files:/bot/data/output/exclusion
+            - prediction-files:/bot/data/prediction
+            - exclusion-files:/bot/data/exclusion
         logging:
             driver: "json-file"
             options:
