@@ -12,6 +12,7 @@ services:
             - 8080
         volumes:
             - prediction-files:/app/prediction
+            - exclusion-files:/app/exclusion
 
   nginx:
         build: ./nginx
@@ -35,6 +36,7 @@ services:
         restart: always
         volumes:
             - prediction-files:/bot/data/output/prediction
+            - exclusion-files:/bot/data/output/exclusion
         logging:
             driver: "json-file"
             options:
@@ -43,3 +45,4 @@ services:
 
 volumes:
   prediction-files:
+  exclusion-files:
