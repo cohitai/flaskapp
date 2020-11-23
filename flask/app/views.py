@@ -36,7 +36,7 @@ def token_required(f):
 def home():
     return render_template('index.html')
 
-@app.route('/uploader', methods=['GET', 'POST'])
+@app.route('/upload_file', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
         f = request.files['file']
