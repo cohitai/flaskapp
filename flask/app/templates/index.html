@@ -57,20 +57,20 @@
    <h2> Articles exclusion form:
    </h2>
 
-   <form action="http://localhost/exclusion_form" method = "POST">
+   <form action="{{ url_for('exclusion_form')}}" method = "POST">
     <br><label for="fname">Exclude article:</label><br>
     <input type="text" name="DocId" placeholder="DocId" required="required">
     <input type="submit" value="Submit">
   </form> 
 
-  <form action="http://localhost/inclusion_form" method = "POST">
+  <form action="{{ url_for('inclusion_form')}}" method = "POST">
     <br><label for="fname">Include article:</label><br>
     <input type="text" name="DocId" placeholder="DocId" required="required">
     <input type="submit" value="Submit">
   </form> 
 
 
-<form action = "http://localhost/upload_file" method = "POST" enctype = "multipart/form-data">
+<form action = "{{ url_for('upload_file')}}" method = "POST" enctype = "multipart/form-data">
      <br><label for="fname">Include article:</label><br>
      <input type = "file" name = "file" />
      <input type = "submit"/>
