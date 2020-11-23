@@ -65,13 +65,13 @@ def get_prediction(docid):
             time.sleep(.5)
 
 
-@app.route('/exclusion_form', methods=['POST'])
+@app.route('/exclusion_form', methods=['GET', 'POST'])
 def exclusion_form():
     docid = next(request.form.values())
     return get_exclusion(docid)
 
 
-@app.route('/inclusion_form', methods=['POST'])
+@app.route('/inclusion_form', methods=['GET', 'POST'])
 def inclusion_form():
     docid = next(request.form.values())
     return reinclude(docid)
