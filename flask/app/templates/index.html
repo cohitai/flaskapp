@@ -45,8 +45,7 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">  
  <div class="login">
 	<h1>Berliner Zeitung: Recommendation's Engine.
-              (v. 2.0.) 
-              
+              (v. 2.0.)             
   </h1>
 
      <!-- Main Input For Receiving Query to our ML -->
@@ -78,15 +77,13 @@
     <button type="submit" class="btn btn-primary btn-block btn-large">Submit</button>
   </form> 
 
-<form action = "{{ url_for('upload_file')}}" method = "POST" enctype = "multipart/form-data">
-     <br><label for="fname">Upload model:</label><br>
-     <input type = "file" name = "file" />
-     <button type="submit" class="btn btn-primary btn-block btn-large">Submit</button>
-</form>
-</div>
+  <form action = "{{ url_for('upload_file')}}" method = "POST" enctype = "multipart/form-data">
+    <br><label for="fname">Upload model:</label><br>
+    <input type = "file" name = "file" />
+    <button type="submit" class="btn btn-primary btn-block btn-large">Submit</button>
+  </form>
 
-<div class="column is-4 is-offset-4">
-  <h3 class="title">Create an API Token: </h3>
+  <h3> Create an API Token: </h3>
   <div class="box">
   <div class="notification is-danger">&nbsp;</div>
   <form action="{{ url_for('create_token')}}" method = "POST">
@@ -96,8 +93,8 @@
   <div class="field">
   <div class="control"><input class="input is-large" name="password" type="password" placeholder="Your Password" /></div>
   </div>
-  <button class="button is-block is-info is-large is-fullwidth">Create</button></form></div>
-</div>
-
+  <button class="button is-block is-info is-large is-fullwidth">Create</button></form>
+  </div>
+  </div>
 </body>
 </html>

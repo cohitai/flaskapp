@@ -171,12 +171,13 @@ def protected():
 @app.route('/create_token',methods=['POST'])
 @login_required
 def create_token():
-    auth = request.authorization
-    user = request.POST.get('username', '')
-    password1 = request.POST.get('password', '')
+    #auth = request.authorization
+    d = request.form.to_dict()
+    user = d['username']
+    password1 = d['password']
 
     if user == 'Livingdocs' and password1 == 'einberliner':
         #token = jwt.encode({'iat': datetime.datetime.utcnow(), 'user' : auth.username, 'exp' : datetime.datetime.utcnow() + datetime.timedelta(minutes=15)}, app.config['SECRET_KEY'])
-        token = jwt.encode({'iat': datetime.datetime.utcnow(), 'user' : auth.username, "scope": "public-api:read", "type": "client"}, app.config['SECRET_KEY'])
+        token = jwt.encode({'iat': datetime.datetime.utcnow(), 'user' : user, "scope": "public-api:read", "type": "client"}, app.config['SECRET_KEY'])
         return jsonify({'token' : token.decode('UTF-8')})
     return make_response('Could not verify!',401)
