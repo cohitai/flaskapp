@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html >
 <head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="UTF-8">
 <title>BLZ: Recommendations Engine</title>
 </head>
@@ -14,8 +16,12 @@
                 <div id="navbarMenuHeroA" class="navbar-menu">
                     <div class="navbar-end">
                         <a href="{{ url_for('auth.logout') }}" class="navbar-item">
-                            Logout
+                          <button type="submit" class="btn btn-primary btn-block btn-large">Logout</button>
                         </a>
+                        <a href="{{ url_for('main.index') }}" class="navbar-item">
+                          <button type="submit" class="btn btn-primary btn-block btn-large">Home</button>
+                        </a>
+
                     </div>
                 </div>
             </div>
@@ -39,7 +45,7 @@
     <form action="{{ url_for('predict')}}" method="post">
     	<input type="text" name="DocId" placeholder="DocId" required="required" />
 
-        <button type="submit" class="btn btn-primary btn-block btn-large">Prediction</button>
+      <button type="submit" class="btn btn-primary btn-block btn-large">Prediction</button>
     </form>
 
    <br>
@@ -55,20 +61,20 @@
    <form action="{{ url_for('exclusion_form')}}" method = "POST">
     <br><label for="fname">Exclude article:</label><br>
     <input type="text" name="DocId" placeholder="DocId" required="required">
-    <input type="submit" value="Submit">
+    <button type="submit" class="btn btn-primary btn-block btn-large">Submit</button>
   </form> 
 
   <form action="{{ url_for('inclusion_form')}}" method = "POST">
     <br><label for="fname">Include article:</label><br>
     <input type="text" name="DocId" placeholder="DocId" required="required">
-    <input type="submit" value="Submit">
+    <button type="submit" class="btn btn-primary btn-block btn-large">Submit</button>
   </form> 
 
 
 <form action = "{{ url_for('upload_file')}}" method = "POST" enctype = "multipart/form-data">
      <br><label for="fname">Upload model:</label><br>
      <input type = "file" name = "file" />
-     <input type = "submit"/>
+     <button type="submit" class="btn btn-primary btn-block btn-large">Submit</button>
 </form>
 </div>
 </body>
