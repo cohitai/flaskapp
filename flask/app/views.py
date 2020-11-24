@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, render_template, make_response
+from flask import Blueprint, Flask, request, jsonify, render_template, make_response
 import pickle
 from flask_sqlalchemy import SQLAlchemy
 import uuid
@@ -43,7 +43,7 @@ def upload_file():
         global model
         model = pickle.load(f)
         pickle.dump(model, open(path_to_model, 'wb'))
-        return 'file uploaded successfully'
+        return '<h1> file uploaded successfully. <h1>'
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -91,7 +91,7 @@ def get_exclusion(docid):
     with open(path_to_exclusion,'wb') as f:
         pickle.dump(list(set(list_ex)),f)
     try:
-        return 'DocId {0} is now excluded'.format(docid)
+        return '<h1>DocId {0} is now excluded<h1>'.format(docid)
     except NameError:
         time.sleep(.5)
 
@@ -112,7 +112,7 @@ def reinclude(docid):
     with open(path_to_exclusion, 'wb') as f:
         pickle.dump(exclusion_data, f)
     
-    return jsonify({"new excluded articles list:": str(exclusion_data)})
+    return "<h1>new excluded articles list:{0}<h1>".format(str(exclusion_data))
 
 @app.route('/exclusions_list', methods=['GET'])
 def list_ext():

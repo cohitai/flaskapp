@@ -1,33 +1,28 @@
 <!DOCTYPE html>
 <html >
 <head>
-  <meta charset="UTF-8">
-  <style>
-  /* width */
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #888;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
-</style>
-
-
+<meta charset="UTF-8">
 <title>BLZ: Recommendations Engine</title>
 </head>
 <body style="background: #59269bc5">
+ 
+  <section class="hero is-primary is-fullheight">
+
+    <div class="hero-head">
+        <nav class="navbar">
+            <div class="container">
+                <div id="navbarMenuHeroA" class="navbar-menu">
+                    <div class="navbar-end">
+                        <a href="{{ url_for('auth.logout') }}" class="navbar-item">
+                            Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+
 
   <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
@@ -71,7 +66,7 @@
 
 
 <form action = "{{ url_for('upload_file')}}" method = "POST" enctype = "multipart/form-data">
-     <br><label for="fname">Include article:</label><br>
+     <br><label for="fname">Upload model:</label><br>
      <input type = "file" name = "file" />
      <input type = "submit"/>
 </form>
