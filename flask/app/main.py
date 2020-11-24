@@ -71,9 +71,10 @@ def predict():
     try:
         prediction = model[int(docid)]
     except KeyError:
-        return "DocidError: {0} does not exist in the system.".format(docid) 
-    return render_template('index.html', prediction_text1='{}'.format(prediction[0]), prediction_text2='{}'.format(prediction[1]), prediction_text3='{}'.format(prediction[2])
-                           , prediction_text4='{}'.format(prediction[3]), prediction_text5='{}'.format(prediction[4]))
+        return "DocidError: {0} does not exist in the system.".format(docid)
+    website = 'https://berliner-zeitung.de/'     
+    return render_template('index.html', prediction_text1='{}'.format(website+prediction[0]), prediction_text2='{}'.format(website+prediction[1]), prediction_text3='{}'.format(website+prediction[2])
+                           , prediction_text4='{}'.format(website+prediction[3]), prediction_text5='{}'.format(website+prediction[4]))
 
 @app.route('/query/<int:docid>', methods=['GET'])
 @login_required
@@ -168,10 +169,13 @@ def protected():
     return jsonify({'message' : 'This is only available for people with valid tokens.'})
 
 @app.route('/create_token',methods=['POST'])
+@login_required
 def create_token():
     auth = request.authorization
+    user = request.POST.get('username', '')
+    password1 = request.POST.get('password', '')
 
-    if auth.username == 'Livingdocs' and auth.password == 'einberliner':
+    if user == 'Livingdocs' and password1 == 'einberliner':
         #token = jwt.encode({'iat': datetime.datetime.utcnow(), 'user' : auth.username, 'exp' : datetime.datetime.utcnow() + datetime.timedelta(minutes=15)}, app.config['SECRET_KEY'])
         token = jwt.encode({'iat': datetime.datetime.utcnow(), 'user' : auth.username, "scope": "public-api:read", "type": "client"}, app.config['SECRET_KEY'])
         return jsonify({'token' : token.decode('UTF-8')})
