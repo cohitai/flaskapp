@@ -1,100 +1,73 @@
 <!DOCTYPE html>
 <html >
-<head>
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta charset="UTF-8">
-<title>BLZ: Recommendations Engine</title>
-</head>
-<body style="background: #59269bc5">
- 
-  <section class="hero is-primary is-fullheight">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/w3css/3/w3.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">  
+    <title>BLZ: Recommendations Engine</title>
+  </head>
+  <body style="background: #59269bc5">
+    <div class="myBox">
+      
+      <nav>
+        <ul>
+          <li><a href="{{ url_for('auth.logout') }}" class="btn btn-primary btn-large">Logout</a></li>
+          <li><a href="{{ url_for('main.index') }}" class="btn btn-primary btn-large">Home</a></li>
+        </ul>
+      </nav>
+      
+      <h1>Berliner Zeitung: Recommendation's Engine. (v. 2.0.)</h1>
 
-    <div class="hero-head">
-        <nav class="navbar">
-            <div class="container">
-                <div id="navbarMenuHeroA" class="navbar-menu">
-                    <div class="navbar-end">
-                        <a href="{{ url_for('auth.logout') }}" class="navbar-item">
-                          <button type="submit" class="btn btn-primary btn-block btn-large">Logout</button>
-                        </a>
-                        <a href="{{ url_for('main.index') }}" class="navbar-item">
-                          <button type="submit" class="btn btn-primary btn-block btn-large">Home</button>
-                        </a>
+      <!-- Main Input For Receiving Query to our ML -->
+      <form action="{{ url_for('predict')}}" method="post">
+    	  <input type="text" name="DocId" placeholder="DocId" required="required" />
+        <button type="submit" class="btn btn-primary btn-large">Prediction</button>
+      </form>
 
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </div>
+      <a href = {{prediction_text1}}> Recommendation 1 </a>
+      <a href = {{prediction_text2}}> Recommendation 2 </a>
+      <a href = {{prediction_text3}}> Recommendation 3 </a>
+      <a href = {{prediction_text4}}> Recommendation 4 </a>
+      <a href = {{prediction_text5}}> Recommendation 5 </a>
+      <h2> Articles exclusion form:</h2>
 
-    <div class="hero-body">
-      <div class="container has-text-centered">
-         {% block content %}
-         {% endblock %}
+      <form action="{{ url_for('exclusion_form')}}" method = "POST">
+        <br><label for="fname">Exclude article:</label><br>
+        <input type="text" name="DocId" placeholder="DocId" required="required">
+        <button type="submit" class="btn btn-primary btn-large">Submit</button>
+      </form> 
+
+      <form action="{{ url_for('inclusion_form')}}" method = "POST">
+        <br><label for="fname">Include article:</label><br>
+        <input type="text" name="DocId" placeholder="DocId" required="required">
+        <button type="submit" class="btn btn-primary btn-large">Submit</button>
+      </form> 
+
+      <form action = "{{ url_for('upload_file')}}" method = "POST" enctype = "multipart/form-data">
+        <br><label for="fname">Upload model:</label><br>
+        <input type = "file" name = "file" />
+        <button type="submit" class="btn btn-primary btn-large">Submit</button>
+      </form>
+
+      <h3> Create an API Token: </h3>
+      <div class="box">
+        <div class="notification is-danger">&nbsp;</div>
+        <form action="{{ url_for('create_token')}}" method = "POST">
+          <div class="field">
+            <div class="control"><input class="input" name="username" type="username" autofocus="" placeholder="Your Username" /></div>
+          </div>
+          <div class="field">
+            <div class="control"><input class="input" name="password" type="password" placeholder="Your Password" /></div>
+          </div>
+          <button class="btn btn-primary btn-large ">Create</button>
+        </form>
       </div>
-    </div>
-  </section>
-
-
-
-  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
-  <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
-  <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
-  <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">  
- <div class="login">
-	<h1>Berliner Zeitung: Recommendation's Engine.
-              (v. 2.0.)             
-  </h1>
-
-     <!-- Main Input For Receiving Query to our ML -->
-    <form action="{{ url_for('predict')}}" method="post">
-    	<input type="text" name="DocId" placeholder="DocId" required="required" />
-
-      <button type="submit" class="btn btn-primary btn-block btn-large">Prediction</button>
-    </form>
-
-   <br>
-   <br>
-   <a href = {{prediction_text1}}> Recommendation 1 </a>
-   <a href = {{prediction_text2}}> Recommendation 2 </a>
-   <a href = {{prediction_text3}}> Recommendation 3 </a>
-   <a href = {{prediction_text4}}> Recommendation 4 </a>
-   <a href = {{prediction_text5}}> Recommendation 5 </a>
-   <h2> Articles exclusion form:
-   </h2>
-
-   <form action="{{ url_for('exclusion_form')}}" method = "POST">
-    <br><label for="fname">Exclude article:</label><br>
-    <input type="text" name="DocId" placeholder="DocId" required="required">
-    <button type="submit" class="btn btn-primary btn-block btn-large">Submit</button>
-  </form> 
-
-  <form action="{{ url_for('inclusion_form')}}" method = "POST">
-    <br><label for="fname">Include article:</label><br>
-    <input type="text" name="DocId" placeholder="DocId" required="required">
-    <button type="submit" class="btn btn-primary btn-block btn-large">Submit</button>
-  </form> 
-
-  <form action = "{{ url_for('upload_file')}}" method = "POST" enctype = "multipart/form-data">
-    <br><label for="fname">Upload model:</label><br>
-    <input type = "file" name = "file" />
-    <button type="submit" class="btn btn-primary btn-block btn-large">Submit</button>
-  </form>
-
-  <h3> Create an API Token: </h3>
-  <div class="box">
-  <div class="notification is-danger">&nbsp;</div>
-  <form action="{{ url_for('create_token')}}" method = "POST">
-  <div class="field">
-  <div class="control"><input class="input is-large" name="username" type="username" autofocus="" placeholder="Your Username" /></div>
-  </div>
-  <div class="field">
-  <div class="control"><input class="input is-large" name="password" type="password" placeholder="Your Password" /></div>
-  </div>
-  <button class="button is-block is-info is-large is-fullwidth">Create</button></form>
-  </div>
-  </div>
-</body>
+    </div>      
+  </body>
 </html>
