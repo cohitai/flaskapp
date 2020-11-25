@@ -9,7 +9,7 @@
     <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="/w3css/3/w3.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">  
+    <!---- <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">  -->
     <title>BLZ: Recommendations Engine</title>
   </head>
   <body style="background: #59269bc5">
@@ -29,12 +29,14 @@
     	  <input type="text" name="DocId" placeholder="DocId" required="required" />
         <button type="submit" class="btn btn-primary btn-large">Prediction</button>
       </form>
-
-      <a href = {{prediction_text1}}> Recommendation 1 </a>
-      <a href = {{prediction_text2}}> Recommendation 2 </a>
-      <a href = {{prediction_text3}}> Recommendation 3 </a>
-      <a href = {{prediction_text4}}> Recommendation 4 </a>
-      <a href = {{prediction_text5}}> Recommendation 5 </a>
+      <ul>
+        <li><a href = {{prediction_text1}}> Recommendation 1 </a></li>
+        <li><a href = {{prediction_text2}}> Recommendation 2 </a></li>
+        <li><a href = {{prediction_text3}}> Recommendation 3 </a></li>
+        <li><a href = {{prediction_text4}}> Recommendation 4 </a></li>
+        <li><a href = {{prediction_text5}}> Recommendation 5 </a></li>
+      </ul>
+      
       <h2> Articles exclusion form:</h2>
 
       <form action="{{ url_for('exclusion_form')}}" method = "POST">
@@ -51,7 +53,7 @@
 
       <form action = "{{ url_for('upload_file')}}" method = "POST" enctype = "multipart/form-data">
         <br><label for="fname">Upload model:</label><br>
-        <input type = "file" name = "file" />
+        <input type = "file" name = "file"/>
         <button type="submit" class="btn btn-primary btn-large">Submit</button>
       </form>
 
