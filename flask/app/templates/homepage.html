@@ -3,13 +3,50 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1 class="title">
-  Berliner-Zeitung Recommendations engine: V. 2.0. beta
-</h1>
-<h2 class="subtitle">
-  Easy authentication ;-)
-</h2>
-<h3 class="subtitle">
-  Please Log In.
-</h3>
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style_bg.css') }}">
+<span id="lastDateBlinker">
+  <h1> Welcome !! </h1>
+</span>
+
+<script type="text/javascript">
+  function blinkLastDateSpan() {
+      if ($("#lastDateBlinker").css("visibility").toUpperCase() == "HIDDEN") {
+          $("#lastDateBlinker").css("visibility", "visible");
+          setTimeout(blinkLastDateSpan, 200);
+      } else {
+          $("#lastDateBlinker").css("visibility", "hidden");
+          setTimeout(blinkLastDateSpan, 200);
+      }
+  }
+  blinkLastDateSpan();
+</script>
+<p>
+  <h1 class="title">
+    Berliner-Zeitung Recommendations engine: V. 2.0. beta
+  </h1>
+</p>
+<p>
+  <h2 class="subtitle">
+    Easy authentication <b><p style="color:yellow">;-)</p></b>
+  </h2>
+</p>
+<p>
+  <h3 class="subtitle">
+    Please Log In.
+  </h3>
+</p>
+
+
+
+<div id="background">
+  <img src='https://www.h-hotels.com/_Resources/Persistent/fe1fa16843a6b361e93ab29e7426155447a40d69/berlin-alexanderplatz-03-2134x1600-1356x1017.jpg' class="stretch" alt="" />
+</div>
+
+<!--<style>
+  div {
+    background-image: url('https://www.h-hotels.com/_Resources/Persistent/fe1fa16843a6b361e93ab29e7426155447a40d69/berlin-alexanderplatz-03-2134x1600-1356x1017.jpg');
+  }
+</style> -->
+
 {% endblock %}

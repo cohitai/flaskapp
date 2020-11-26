@@ -9,6 +9,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Berliner-Zeitung Auth API.</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" />
+    <style>
+        .custom-bg{
+            background-color:rgb(2, 2, 2);
+        }
+    </style>
 </head>
 
 <body>
@@ -21,24 +26,24 @@
                     <div id="navbarMenuHeroA" class="navbar-menu">
                         <div class="navbar-end">
                             <a href="{{ url_for('main.index') }}" class="navbar-item">
-                                Home
+                                <p style="color:blue">Home</p>
                             </a>
                             {% if current_user.is_authenticated %}
                             <a href="{{ url_for('main.profile') }}" class="navbar-item">
-                                Form API
+                                <p style="color:blue">Form API</p>
                             </a>
                             {% endif %}
                             {% if not current_user.is_authenticated %}
                             <a href="{{ url_for('auth.login') }}" class="navbar-item">
-                                Login
+                                <p style="color:blue">Login</p>
                             </a>
                             <a href="{{ url_for('auth.signup') }}" class="navbar-item">
-                                Sign Up
+                                <p style="color:blue">Sign Up</p>
                             </a>
                             {% endif %}
                             {% if current_user.is_authenticated %}
                             <a href="{{ url_for('auth.logout') }}" class="navbar-item">
-                                Logout
+                                <p style="color:blue">Logout</p>
                             </a>
                             {% endif %}
                         </div>
