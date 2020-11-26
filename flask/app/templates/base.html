@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Berliner-Zeitung Auth API.</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_bg.css') }}">
 </head>
 
 <body>
@@ -49,6 +50,11 @@
 
         <div class="hero-body">
             <div class="container has-text-centered">
+                <p>
+                    <div id="background">
+                      <img src='https://www.h-hotels.com/_Resources/Persistent/fe1fa16843a6b361e93ab29e7426155447a40d69/berlin-alexanderplatz-03-2134x1600-1356x1017.jpg' class="stretch" alt="" />
+                    </div>
+                </p>
                {% block content %}
                {% endblock %}
             </div>
