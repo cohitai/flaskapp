@@ -4,72 +4,92 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+     
+    <!-- <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="/w3css/3/w3.css">
-    <!---- <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">  -->
-    <title>BLZ: Recommendations Engine</title>
-  </head>
-  <body style="background: #59269bc5">
-    <div class="myBox">
-      
-      <nav>
-        <ul>
-          <li><a href="{{ url_for('auth.logout') }}" class="btn btn-primary btn-large">Logout</a></li>
-          <li><a href="{{ url_for('main.index') }}" class="btn btn-primary btn-large">Home</a></li>
-        </ul>
-      </nav>
-      
-      <h1>Berliner Zeitung: Recommendation's Engine. (v. 2.0.)</h1>
+    <link rel="stylesheet" href="/w3css/3/w3.css"> -->
 
-      <!-- Main Input For Receiving Query to our ML -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" /> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_bg.css') }}">
+     
+    <title><h1 style="color:blue">BLZ: Recommendations Engine</h1></title>
+  
+  </head>
+
+  <body>
+    <section class="hero is-primary is-fullheight has-text-centered""> 
+      
+      <div class="hero-head">
+        <nav class="navbar">
+            <div class="container">
+
+                <div id="navbarMenuHeroA" class="navbar-menu">
+                    <div class="navbar-end">
+                        <a href="{{ url_for('main.index') }}" class="navbar-item">
+                            <p style="color:blue">Home</p>
+                        </a>
+                        <a href="{{ url_for('auth.logout') }}" class="navbar-item">
+                            <p style="color:blue">Logout</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+      </div>
+
+      
+      <p>
+        <h1 class="title" style="color:blue" >
+          Berliner-Zeitung's Recommendations engine: V. 2.0. beta
+        </h1>
+      </p>
+
       <form action="{{ url_for('predict')}}" method="post">
-    	  <input type="text" name="DocId" placeholder="DocId" required="required" />
-        <button type="submit" class="btn btn-primary btn-large">Prediction</button>
+    	  <input type="text" name="DocId" placeholder="DocId" required="required"/>
+        <p><button type="submit" class="btn btn-primary btn-large">Prediction</button></p>
       </form>
       <ul>
-        <li><a href = {{prediction_text1}}> Recommendation 1 </a></li>
-        <li><a href = {{prediction_text2}}> Recommendation 2 </a></li>
-        <li><a href = {{prediction_text3}}> Recommendation 3 </a></li>
-        <li><a href = {{prediction_text4}}> Recommendation 4 </a></li>
-        <li><a href = {{prediction_text5}}> Recommendation 5 </a></li>
+        <li><a style="color:blue" href = {{prediction_text1}}> Recommendation 1 </a></li>
+        <li><a style="color:blue" href = {{prediction_text2}}> Recommendation 2 </a></li>
+        <li><a style="color:blue" href = {{prediction_text3}}> Recommendation 3 </a></li>
+        <li><a style="color:blue" href = {{prediction_text4}}> Recommendation 4 </a></li>
+        <li><a style="color:blue" href = {{prediction_text5}}> Recommendation 5 </a></li>
       </ul>
       
-      <h2> Articles exclusion form:</h2>
+      <h2 style="color:blue"> Articles exclusion form:</h2>
 
       <form action="{{ url_for('exclusion_form')}}" method = "POST">
-        <br><label for="fname">Exclude article:</label><br>
-        <input type="text" name="DocId" placeholder="DocId" required="required">
-        <button type="submit" class="btn btn-primary btn-large">Submit</button>
+        <p style="color:blue"><br><label for="fname">Exclude article:</label><br></p>
+        <p><input type="text" name="DocId" placeholder="DocId" required="required"></p>
+        <p><button type="submit" class="btn btn-primary btn-large">Submit</button></p>
       </form> 
 
       <form action="{{ url_for('inclusion_form')}}" method = "POST">
-        <br><label for="fname">Include article:</label><br>
-        <input type="text" name="DocId" placeholder="DocId" required="required">
-        <button type="submit" class="btn btn-primary btn-large">Submit</button>
+        <p style="color:blue"><br><label for="fname">Include article:</label><br></p>
+        <p><input type="text" name="DocId" placeholder="DocId" required="required"></p>
+        <p><button type="submit" class="btn btn-primary btn-large">Submit</button></p>
       </form> 
 
       <form action = "{{ url_for('upload_file')}}" method = "POST" enctype = "multipart/form-data">
-        <br><label for="fname">Upload model:</label><br>
-        <input type = "file" name = "file"/>
-        <button type="submit" class="btn btn-primary btn-large">Submit</button>
+        <p style="color:blue" ><br><label for="fname">Upload model:</label><br></p>
+        <p><input type = "file" name = "file"/></p>
+        <p><button type="submit" class="btn btn-primary btn-large">Submit</button></p>
       </form>
 
-      <h3> Create an API Token: </h3>
-      <div class="box">
-        <div class="notification is-danger">&nbsp;</div>
-        <form action="{{ url_for('create_token')}}" method = "POST">
-          <div class="field">
-            <div class="control"><input class="input" name="username" type="username" autofocus="" placeholder="Your Username" /></div>
-          </div>
-          <div class="field">
-            <div class="control"><input class="input" name="password" type="password" placeholder="Your Password" /></div>
-          </div>
-          <button class="btn btn-primary btn-large ">Create</button>
-        </form>
-      </div>
-    </div>      
+      <h3 style="color:blue" > Create an API Token: </h3>
+      <form action="{{ url_for('create_token')}}" method = "POST">
+        <p><input name="username" type="username" autofocus="" placeholder="Your Username" /></p>
+        <p><input name="password" type="password" placeholder="Your Password" /></p>
+        <p><button class="btn btn-primary btn-large ">Create</button></p>
+      </form>
+      <!-- <img src='https://static.dw.com/image/48651449_303.jpg' class="stretch" alt=""/>
+    </section>
+    <style>
+      div {
+        background-image: url('https://static.dw.com/image/48651449_303.jpg');
+      }
+    </style> -->
   </body>
 </html>
