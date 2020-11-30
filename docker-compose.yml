@@ -30,8 +30,8 @@ services:
             - "443:443"
   bot:
         build: ./training_bot_v2
-        # volumes:
-            # - /home/cohitai/flaskapp/training_bot/BLZ/data:/bot/data
+        volumes:
+            - /home/cohitai/flaskapp/training_bot_v2/BLZ-2/data/models:/bot/data/models
         container_name: bot
         restart: always
         volumes:
@@ -41,7 +41,20 @@ services:
             driver: "json-file"
             options:
               max-size: "200k"
-              max-file: "5" 
+              max-file: "5"
+ 
+  liv2mongbot:
+        build: ./mongoDB
+        container_name: live2mong
+        restart: always
+        environment:
+            - APP_NAME=MyLiv2MongoDB
+        logging:
+          driver: "json-file"
+          options:
+            max-size: "200k"
+            max-file: "5"
+
 
 volumes:
   prediction-files:
