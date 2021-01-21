@@ -2,3 +2,11 @@ flask/vpn/
 flask/app/__pycache__/
 flask/model.pkl
 flask/__pycache__/
+mongoDB/
+training_bot_v2/
+docker-compose.yml.save
+docker-compose.yml.save.1
+docker-compose.yml.save.2
+tatus
+flaskapp.code-workspace
+letsencrypt
