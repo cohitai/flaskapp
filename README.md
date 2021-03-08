@@ -12,3 +12,5 @@ with the changes. The certificates renewal should work automatically.
 
 3. Better for the future: Build the server inside the K8s cluster. (with shared volumes instead of http updates, although both will work fine). 
 
+4. docker-compose up to start the server. 
+
